@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     sdd = { 
-      source = "../.."
+      source = "github.com/borgeslima/ssd-provider"
     }
   }
 }
