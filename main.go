@@ -1,36 +1,34 @@
-// Copyright (c) HashiCorp, Inc.
-// SPDX-License-Identifier: MPL-2.0
-
 package main
 
 import (
 	"context"
 	"flag"
 	"log"
-	"flag"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
-	"ssd-provider/internal/provider/sdd"
+	"github.com/hashicorp/terraform-plugin-framework/providerserver"
+	"github.com/borgeslima/ssd-provider/sdd/provider"
 )
 
 
 var (
-	version string = "0.0.1"
+
+	version string = "1.0.0"
+
 )
 
 func main() {
+	var debug bool
 
-   var debug bool
-
-	flag.BoolVar(&debug, "debug", false, "set to true to run the provider with support for debuggers like delve")
-
+	flag.BoolVar(&debug, "debug", false, "Definido como true para executar o provedor com suporte para depuradores como delve")
 	flag.Parse()
 
-	plugin.Serve(&plugin.ServeOpts{
-		ProviderAddr: "github.com/borgeslima/ssd-provider",
-		ProviderFunc: func() *schema.Provider {
-			return sdd.Provider()
-		},
-		Debug: debug,
-	})
+	opts := providerserver.ServeOpts{
+		Address: "github.com/borgeslima/ssd-provider",
+		Debug:   debug,
+	}
+
+	err := providerserver.Serve(context.Background(), provider.Provider(version), opts)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }

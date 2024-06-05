@@ -1,12 +1,10 @@
 terraform {
   required_providers {
-    hashicups = { 
+    sdd = { 
       source = "../.."
     }
   }
 }
 
-provider "hashicups" {
-  
-}
+provider "sdd" {}
 
