@@ -5,7 +5,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/borgeslima/ssd-provider/sdd"
+	"ssd-provider/sdd"
+
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 
@@ -25,7 +26,7 @@ func main() {
 		Debug:   debug,
 	}
 
-	err := providerserver.Serve(context.Background(), sdd.New(version), opts)
+	err := providerserver.Serve(context.Background(), sdd.Provider(version), opts)
 
 	if err != nil {
 		log.Fatal(err.Error())

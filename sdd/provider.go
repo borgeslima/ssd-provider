@@ -26,7 +26,7 @@ type hashicupsProvider struct {
 }
 
 func (p *hashicupsProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
-	resp.TypeName = "sdd_plan"
+	resp.TypeName = "sdd"
 	resp.Version = p.version
 }
 
