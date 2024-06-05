@@ -6,5 +6,7 @@ terraform {
   }
 }
 
-provider "sdd" {}
+provider "sdd" {
+  
+}
 
